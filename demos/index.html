@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automation Demos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f17;
+  --surface: #161927;
+  --surface-2: #1e2236;
+  --border: #2a3050;
+  --text: #dde2f5;
+  --muted: #7a84aa;
+  --green: #00e589;
+  --blue: #5b8df5;
+  --orange: #ff7b2c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: rgba(0,229,137,0.08);
+  border: 1px solid rgba(0,229,137,0.25);
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin-bottom: 18px;
+}
+h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+.sub {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  transition: border-color .2s, transform .15s, box-shadow .2s;
+}
+.card:hover {
+  border-color: rgba(91,141,245,0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  flex-shrink: 0;
+}
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.card .go {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+}
+footer {
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="badge">Live demos</div>
+    <h1>Automation portfolio</h1>
+    <p class="sub">Interactive HTML demos of lead and support workflows. Open any card to explore the full walkthrough.</p>
+    <div class="grid">
+      <a class="card" href="/lead-pipeline">
+        <h2><span class="dot"></span>Lead Pipeline Demo</h2>
+        <p>Verified lead enrichment and cold-email outreach flow — from raw leads to client-ready outreach.</p>
+        <div class="go">Open demo →</div>
+      </a>
+      <a class="card" href="/support-email-classifier">
+        <h2><span class="dot" style="background:var(--orange);box-shadow:0 0 10px var(--orange)"></span>AI Support Email Classifier</h2>
+        <p>Classify inbound support mail, route by intent, and show before/after automation evidence.</p>
+        <div class="go">Open demo →</div>
+      </a>
+    </div>
+    <footer>Static demos · push a new folder to add more</footer>
+  </div>
+</body>
+</html>
