@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agency Automation Suite for Local Businesses (n8n + HubSpot) | Automation Demo</title><meta name="robots" content="noindex,nofollow"><meta name="description" content="Replay of recorded demo runs: lead intake, AI scoring, CRM pipeline, simulated missed-call text-back, booking, follow-ups, review requests, client report. Fictional business, independent build, not GoHighLevel, SMS simulated.">
+<style>
+:root{--bg:#0f1117;--s:#1a1d27;--s2:#222638;--b:#2e3347;--t:#e8eaf2;--m:#8890aa;--g:#10d97e;--o:#f97316;--bl:#6c8ef7;--r:#f87171;--p:#a78bfa;--y:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t);font:15px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+code,.mono{font-family:ui-monospace,Menlo,Consolas,monospace}code{color:var(--g);font-size:12px}
+.top{position:sticky;top:0;z-index:50;background:rgba(15,17,23,.96);border-bottom:1px solid var(--b);display:flex;gap:10px;align-items:center;padding:0 24px;height:52px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:700;color:var(--g);border:1px solid rgba(16,217,126,.3);background:rgba(16,217,126,.08);border-radius:20px;padding:3px 11px}.pill.w{color:var(--o);border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.08)}
+.hero{text-align:center;padding:56px 24px 26px}h1{font-size:clamp(28px,4.6vw,48px);line-height:1.12;letter-spacing:-.02em;font-weight:800;max-width:900px;margin:0 auto 14px}h1 em{font-style:normal;color:var(--g)}
+.sub{color:var(--m);max-width:780px;margin:0 auto 20px;font-size:16px}
+.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}.stat{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:12px 20px;min-width:140px}.stat b{display:block;font-size:24px;color:var(--g)}.stat span{font-size:12px;color:var(--m)}
+.note{max-width:900px;margin:10px auto;font-size:13px;color:var(--m);background:var(--s);border:1px solid var(--b);border-left:3px solid var(--o);border-radius:8px;padding:10px 14px;text-align:left}
+section{max-width:1140px;margin:0 auto;padding:34px 24px}h2{font-size:26px;margin-bottom:6px}.lead{color:var(--m);margin-bottom:18px;max-width:780px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tab{background:var(--s);border:1px solid var(--b);color:var(--m);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer}.tab.on{color:#0f1117;background:var(--g);border-color:var(--g)}
+.btn{background:var(--g);color:#0f1117;border:0;border-radius:9px;padding:10px 20px;font-weight:700;font-size:14px;cursor:pointer}.btn.sec{background:var(--s2);color:var(--t);border:1px solid var(--b)}.btn:disabled{opacity:.45}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:860px){.g2{grid-template-columns:1fr}}
+.card{background:var(--s);border:1px solid var(--b);border-radius:14px;padding:18px}.card h3{font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.f{margin-bottom:8px}.f label{display:block;font-size:11px;color:var(--m)}.f div{background:#0a0c12;border:1px solid var(--b);border-radius:7px;padding:7px 10px;font-size:13px}
+.step{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-radius:8px;font-size:13px;opacity:.3;transition:.3s}.step.on{opacity:1;background:rgba(16,217,126,.06)}.step i{flex:none;width:16px;height:16px;border-radius:50%;border:2px solid var(--b);margin-top:3px}.step.on i{background:var(--g);border-color:var(--g)}.step small{display:block;color:var(--m);font-size:11px}
+.out{background:#0a0c12;border:1px solid var(--b);border-radius:10px;padding:12px;font-size:13px;margin-top:8px;min-height:60px;white-space:pre-wrap}
+.tag{display:inline-block;padding:2px 9px;border-radius:6px;font:700 11px ui-monospace,monospace}.hot{background:rgba(248,113,113,.15);color:var(--r)}.warm{background:rgba(251,191,36,.15);color:var(--y)}.cold{background:rgba(108,142,247,.15);color:var(--bl)}.spam{background:rgba(90,98,128,.25);color:var(--m)}
+.phone{max-width:330px;margin:0 auto;background:#0a0c12;border:2px solid var(--b);border-radius:26px;padding:16px}.bub{background:var(--s2);border-radius:14px;padding:10px 12px;font-size:13px;margin:8px 0}.bub.me{background:rgba(16,217,126,.14)}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.col{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:10px;min-height:150px}.col h4{font-size:11px;color:var(--m);text-transform:uppercase;margin-bottom:8px}.k{background:var(--s2);border:1px solid var(--b);border-radius:8px;padding:8px;font-size:12px;margin-bottom:6px}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid var(--b);padding:6px 8px;text-align:left}th{color:var(--m);font-size:11px;text-transform:uppercase}.ok{color:var(--g);font-weight:700}
+.gi{background:var(--s);border:1px solid var(--b);border-radius:8px;padding:7px 10px;font-size:12px}.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}.c{color:var(--m)}
+footer{max-width:1140px;margin:0 auto;padding:30px 24px 60px;color:var(--m);font-size:12px}
+</style></head><body>
+<div class="top"><b>Agency Automation Suite</b><span class="pill">Demo of a fictional business</span><span class="pill w">Not GoHighLevel</span><span class="pill w">SMS simulated</span><span class="pill">AI used: scoring + message drafting</span></div>
+<div class="hero"><h1>A "GoHighLevel-style" agency toolkit, <em>built from tools you control</em></h1>
+<p class="sub">For the fictional <b>Northside Dental Group</b>: instant lead reply, CRM pipeline, simulated missed-call text-back, booking sync, capped follow-ups, review requests and a client report. Independent build on n8n, HubSpot, Cal.com, Gmail, Slack and Postgres.</p>
+<div class="stats"><div class="stat"><b>30/30</b><span>golden-set cases passed (demo test results, latest run)</span></div><div class="stat"><b>9</b><span>n8n workflows</span></div><div class="stat"><b>16</b><span>simulated texts logged, never sent</span></div><div class="stat"><b>0</b><span>real patients or real SMS</span></div></div>
+<div class="note"><b>Please read:</b> this page is a scripted replay of results recorded from the live demo system. It makes no network calls. It is an independent build and is <b>not GoHighLevel</b> and not affiliated with it. Texts are <b>simulated</b> (logged only; no SMS provider). All people, numbers and the practice are fictional. Emails in the live demo go to a test inbox only. Schedules and the optional Cal.com webhook are described as features and are paused in the demo.</div></div>
+
+<section><h2>Replay a scenario</h2><p class="lead">Pick a scenario and press Run. Every step shows what the real workflow returned in the recorded run.</p>
+<div class="tabs" id="tabs"></div>
+<div class="g2"><div class="card"><h3 id="inh">Input</h3><div id="inp"></div><button class="btn" id="run" style="margin-top:8px">Run recorded scenario</button> <button class="btn sec" id="rst" style="margin-top:8px">Reset</button></div>
+<div class="card"><h3>What the workflow did</h3><div id="steps"></div></div></div>
+<div class="card" style="margin-top:16px"><h3>Result</h3><div id="res" class="out">Press Run.</div></div></section>
+
+<section><h2>Pipeline board (end state of the recorded test leads)</h2><p class="lead">Neon stages for the flagged test leads; the HubSpot deal stage is mapped from these.</p><div class="board" id="board"></div></section>
+
+<section><h2>Client report (demo test results, 7-day window)</h2><div class="card"><table id="rep"></table><p class="c" style="margin-top:8px" id="narr"></p></div></section>
+
+<section><h2>Golden set: 30 cases (demo test results)</h2><p class="lead" id="gm"></p><div class="gg" id="gold"></div></section>
+
+<section><h2>Honest scope</h2><div class="card" style="font-size:14px;color:var(--m)">Independent build, not GoHighLevel and not a GoHighLevel reseller product. SMS is simulated (stored and shown, never sent). HubSpot free-tier deal stages are mapped to suite stages. AI (Claude) scores leads and drafts replies; routing, dedupe, opt-out, caps and review rules are fixed code. Not a compliance product (no A2P/consent tooling claimed). A client-ready version would use that client's own accounts and be tested on their examples first.</div></section>
+<footer>Fictional demo business. Figures are demo test results from a recorded run, not client results.</footer>
+<script>
+const D={
+lead:{label:'Hot lead',inh:'Lead form (fictional)',inp:[['Name','Maria R.'],['Service','Teeth whitening'],['Message','Hi, I would like to book teeth whitening this Saturday if possible.']],
+steps:[['Normalize + validate','required fields ok'],['Dedupe check','no existing lead for this email or phone'],['Claude qualify','score: hot, interest: Teeth whitening'],['HubSpot','contact + deal created, stage set'],['Instant reply','email drafted and sent to the test inbox'],['Slack','hot-lead alert posted to the suite channel'],['Neon','lead, message and pipeline event stored']],
+res:'<span class="tag hot">HOT</span> Reason (AI): "Wants to book teeth whitening this Saturday, a specific treatment with a clear timeframe."\nStage: Contacted. Slack: "A11 hot lead (demo), Northside Dental, GHL-style suite on n8n + HubSpot, not GoHighLevel".'},
+dup:{label:'Duplicate lead',inh:'Same form, submitted again',inp:[['Name','Maria R.'],['Email','same address as before'],['Note','Resubmitting the exact same email (any letter case) or the same phone']],
+steps:[['Normalize','email lower-cased'],['Dedupe check','exact email / phone match found'],['Stop','no AI call, no CRM write, no email, no Slack']],
+res:'Form page: "Already on file - nothing new was created." No second contact or deal. (Golden set D01, D02, D04 passed.)'},
+call:{label:'Missed call (SMS simulated)',inh:'Missed-call form (fictional caller)',inp:[['Caller','Em'],['Phone','fictional number'],['Time','after hours']],
+steps:[['Validate number','valid'],['Opt-out check','not opted out'],['10-minute repeat check','first call'],['Claude drafts text-back','under 160 characters target'],['Store','message channel sms_sim, status simulated'],['Mirror','email to test inbox + Slack note']],
+res:'<b>SMS simulated, nothing sent.</b>\n"Hi Em, this is Northside Dental Group. Sorry we missed your call! Reply here or book online anytime, and we\'ll get right back to you. [booking link]"'},
+book:{label:'Booking',inh:'Booking event (calendar webhook or fallback form)',inp:[['Attendee','Nadia K.'],['Slot','2026-10-25 10:00 UTC'],['Event','created']],
+steps:[['Match lead by email','found'],['Dedupe by booking id','new'],['Neon appointment','status booked'],['HubSpot deal stage','moved to the booked stage'],['Follow-ups','stopped for this lead'],['Confirmation + Slack','sent to test inbox / suite channel']],
+res:'Slack: "A11 booking (demo) Nadia K. - booked for 2026-10-25 10:00 UTC." Repeat delivery of the same booking id returns already_recorded (no second email). Reschedule and cancel were also tested.'},
+fu:{label:'Follow-ups',inh:'On-demand follow-up run (no schedule)',inp:[['Rule','Up to 3 touches per lead'],['Skips','booked, won, opted-out, missed-call stubs'],['Idle window','0 minutes (demo)']],
+steps:[['Select idle leads','1 eligible'],['Claude drafts touch','follow-up 1'],['Send','to the test inbox'],['Log + Slack','touch counted']],
+res:'Golden set F01-F04: touch 1 then 2; max 3 then closed; booked and opted-out leads get nothing. In the schedule-enabled version this runs daily; here it is on demand.'},
+rev:{label:'Visit + review',inh:'Appointment outcome form',inp:[['Outcome','Completed'],['Rating link clicked','5, then 2 (two cases)']],
+steps:[['Mark completed','stage Won'],['Review request email','5 rating links (to test inbox)'],['Bot-safe confirm page','GET shows a confirm page only'],['POST rating','saved once'],['Route','4-5 public link / 1-3 private Slack']],
+res:'Rating 5: "Thank you!" + public link. Rating 2: "Thank you for telling us", routed privately to Slack. Second submit: "Already submitted" (409). A bot GET changes nothing.'}
+};
+const board={New:[],Contacted:['Omar F. - implants (hot)','Test Patient - cleaning (hot)','Missed-call stubs x3'],Booked:['Tara Q. - braces (hot)','Live test - cleaning (warm)'],Won:['Maria R. - whitening (hot)','Nadia K. - whitening (hot)']};
+const rep={Leads:5,Hot:4,Warm:1,Appointments:8,Completed:2,Won:2,'Review requests':2,Reviews:1,'Avg rating':5,'Missed calls handled':2,'Avg first reply (s)':3.4};
+const narr='"Leads 5 (hot 4), appointments 8, completed visits 2, reviews 1, missed calls handled 2." (generated narrative from the recorded run)';
+const gold=[['D01','dedupe','same email -> duplicate'],['D02','dedupe','upper-case email -> duplicate'],['D03','dedupe','plus-address -> distinct new lead'],['D04','dedupe','same phone -> duplicate'],['F01','followup','touch 1 then 2'],['F02','followup','max 3 then closed'],['F03','followup','booked gets none'],['F04','followup','opted-out gets none'],['M01','missed call','text-back under 160'],['M02','missed call','repeat within 10 min suppressed'],['M03','missed call','invalid number rejected'],['M04','missed call','opted-out suppressed'],['Q01','qualify','hot'],['Q02','qualify','hot'],['Q03','qualify','hot or warm'],['Q04','qualify','cold or warm'],['Q05','qualify','cold or warm'],['Q06','qualify','spam'],['Q07','qualify','spam or cold'],['Q08','qualify','cold or spam'],['Q09','qualify','hot, warm or cold'],['Q10','qualify','hot or warm'],['R01','review','rating 5 public link'],['R02','review','rating 2 private'],['R03','review','double submit ignored'],['R04','review','bot GET changes nothing'],['S01','safety','prompt injection not obeyed'],['S02','safety','SQL text stored literally'],['S03','safety','HTML escaped'],['S04','safety','never claims to be GoHighLevel']];
+const $=i=>document.getElementById(i);let cur='lead',tm=[];
+function show(k){cur=k;tm.forEach(clearTimeout);tm=[];const d=D[k];document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.k==k));$('inh').textContent=d.inh;$('inp').innerHTML=d.inp.map(x=>`<div class="f"><label>${x[0]}</label><div>${x[1]}</div></div>`).join('');$('steps').innerHTML=d.steps.map(s=>`<div class="step"><i></i><div>${s[0]}<small>${s[1]}</small></div></div>`).join('');$('res').innerHTML='Press Run.';$('run').disabled=false}
+$('tabs').innerHTML=Object.keys(D).map(k=>`<button class="tab" data-k="${k}">${D[k].label}</button>`).join('');
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>show(t.dataset.k));
+$('run').onclick=()=>{$('run').disabled=true;const st=[...document.querySelectorAll('.step')];st.forEach((s,i)=>tm.push(setTimeout(()=>s.classList.add('on'),i*550)));tm.push(setTimeout(()=>{$('res').innerHTML=D[cur].res;$('run').disabled=false},st.length*550+250))};
+$('rst').onclick=()=>show(cur);show('lead');
+$('board').innerHTML=Object.entries(board).map(([k,v])=>`<div class="col"><h4>${k} (${v.length})</h4>${v.map(x=>`<div class="k">${x}</div>`).join('')}</div>`).join('');
+$('rep').innerHTML='<tr>'+Object.keys(rep).map(k=>`<th>${k}</th>`).join('')+'</tr><tr>'+Object.values(rep).map(v=>`<td>${v}</td>`).join('')+'</tr>';$('narr').textContent=narr;
+$('gold').innerHTML=gold.map(g=>`<div class="gi"><b class="ok">${g[0]} PASS</b> <span class="c">${g[1]}</span><br>${g[2]}</div>`).join('');
+$('gm').textContent='Demo test results: 30/30 on the latest run. Across six recorded runs during the build the scores were 28, 30, 30, 29, 30, 30 out of 30 (two early runs found a test-runner bug and one transient AI call failure; all fixed or re-run).';
+</script></body></html>
